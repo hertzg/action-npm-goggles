@@ -1,6 +1,6 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'npm-goggles'
+description: 'Provide insights into your npm package'
+author: 'George Kotchlamazashvili <gerogedot@gmail.com>'
 inputs:
   milliseconds: # change this
     required: true
