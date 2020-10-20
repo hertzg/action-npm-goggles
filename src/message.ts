@@ -7,14 +7,8 @@ export const details = (
   title: string,
   content: string,
   open = false
-): string => `<details${open ? ' open' : ''}><summary>
-
-${title}
-</summary>
-<blockquote>
-
-${content}
-</blockquote>
+): string => `<details${open ? ' open' : ''}><summary>${title}</summary>
+<blockquote>${content}</blockquote>
 </details>`
 
 export const header = (

@@ -22,5 +22,8 @@ const TITLE = ':package: Packing output'
 export const dryPack = async (packageRoot: string): Promise<string> => {
   const buffer = await execNpmDryPack(packageRoot)
 
-  return details(escape(TITLE), escape(buffer.toString('utf-8')))
+  return details(
+    escape(TITLE),
+    `\n\n\`\`\`\n${escape(buffer.toString('utf-8'))}\n\`\`\``
+  )
 }
