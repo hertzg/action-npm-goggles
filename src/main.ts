@@ -1,18 +1,28 @@
-import * as core from '@actions/core'
-import {wait} from './wait'
+import {getInput, setFailed} from '@actions/core'
+import {getOctokit} from '@actions/github'
+import {join, resolve} from 'path'
+import {runAction} from './runAction'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
+    const token: string = getInput('token')
+    const octokit = getOctokit(token)
+    const login: string = getInput('commenter')
+    const packageRootPath: string = getInput('package-root-path')
+    const packageJsonPath: string = getInput('package-json-path')
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const resolvedPackageRoot = resolve(packageRootPath)
+    const resolvedPackageJsonPath = resolve(
+      join(resolvedPackageRoot, packageJsonPath)
+    )
 
-    core.setOutput('time', new Date().toTimeString())
+    await runAction(octokit, {
+      login,
+      resolvedPackageRoot,
+      resolvedPackageJsonPath
+    })
   } catch (error) {
-    core.setFailed(error.message)
+    setFailed(error.message)
   }
 }
 

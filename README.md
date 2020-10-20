@@ -23,7 +23,7 @@ $ npm install
 
 Build the typescript and package it for distribution
 ```bash
-$ npm run build && npm run package
+$ npm runAction build && npm runAction package
 ```
 
 Run the tests :heavy_check_mark:  
@@ -48,13 +48,13 @@ See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-
 
 ## Change the Code
 
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
+Most toolkit and CI/CD operations involve async operations so the action is runAction in an async function.
 
 ```javascript
 import * as core from '@actions/core';
 ...
 
-async function run() {
+async function runAction() {
   try { 
       ...
   } 
@@ -63,18 +63,18 @@ async function run() {
   }
 }
 
-run()
+runAction()
 ```
 
 See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
 
 ## Publish to a distribution branch
 
-Actions are run from GitHub repos so we will checkin the packed dist folder. 
+Actions are runAction from GitHub repos so we will checkin the packed dist folder. 
 
-Then run [ncc](https://github.com/zeit/ncc) and push the results:
+Then runAction [ncc](https://github.com/zeit/ncc) and push the results:
 ```bash
-$ npm run package
+$ npm runAction package
 $ git add dist
 $ git commit -a -m "prod dependencies"
 $ git push origin releases/v1

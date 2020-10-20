@@ -21,4 +21,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: ./
         with:
-          milliseconds: 1000
+          package-root: './src/__tests__/fixtures/fakePackage'
+          package-json-path: './package.json'
