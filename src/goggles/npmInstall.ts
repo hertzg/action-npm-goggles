@@ -1,12 +1,12 @@
 import {details} from '../message'
-import {join, resolve} from 'path'
+import {join} from 'path'
 import {dbgExec, stdExec, strExec} from '../exec'
 
 const createSrcPackage = async (packageRoot: string): Promise<string> => {
   const [srcTar] = await strExec('npm', ['pack'], {
     cwd: packageRoot
   })
-  return resolve(join(packageRoot, `./${srcTar.trim()}`))
+  return join(packageRoot, `./${srcTar.trim()}`)
 }
 
 const createTempPackage = async (): Promise<string> => {
