@@ -1,6 +1,6 @@
 import {exec} from '@actions/exec'
 import {debug} from '@actions/core'
-import {details, escape} from '../message'
+import {details} from '../message'
 
 const execNpmDryPack = async (packageRoot: string): Promise<Buffer> => {
   const chunks: Buffer[] = []
@@ -22,8 +22,5 @@ const TITLE = ':package: Packing output'
 export const dryPack = async (packageRoot: string): Promise<string> => {
   const buffer = await execNpmDryPack(packageRoot)
 
-  return details(
-    escape(TITLE),
-    `\n\n\`\`\`\n\n${buffer.toString('utf-8')}\n\`\`\`\n`
-  )
+  return details(TITLE, `\n\n\`\`\`\n${buffer.toString('utf-8')}\n\`\`\`\n`)
 }
