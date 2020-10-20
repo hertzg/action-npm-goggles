@@ -1,6 +1,6 @@
 {
   "name": "action-npm-goggles",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "description": "GitHub Action giving insights into your npm package",
   "main": "lib/main.js",
