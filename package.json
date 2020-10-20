@@ -12,7 +12,7 @@
     "package": "ncc build --source-map --license licenses.txt --minify",
     "test": "jest",
     "prepare": "npm run build && npm run package",
-    "preversion": "npm run prepare && git add . && git commit -am 'chore: build before version'"
+    "preversion": "npm run prepare && git commit -Am 'chore: build before version'"
   },
   "repository": {
     "type": "git",
