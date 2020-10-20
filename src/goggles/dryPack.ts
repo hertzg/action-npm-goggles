@@ -24,6 +24,6 @@ export const dryPack = async (packageRoot: string): Promise<string> => {
 
   return details(
     escape(TITLE),
-    `\n\n\`\`\`\n${buffer.toString('utf-8')}\n\`\`\`\n`
+    `\n\n\`\`\`\n\n${buffer.toString('utf-8')}\n\`\`\`\n`
   )
 }
