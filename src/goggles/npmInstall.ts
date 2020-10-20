@@ -1,54 +1,12 @@
-import {exec, ExecOptions} from '@actions/exec'
-import {debug} from '@actions/core'
 import {details} from '../message'
 import {resolve} from 'path'
-
-const dbgExec = async (
-  cmd: string,
-  args: string[],
-  options?: ExecOptions
-): Promise<number> =>
-  exec(cmd, args, {
-    ...(options || {}),
-    listeners: {
-      debug,
-      ...(options?.listeners || {})
-    }
-  })
-
-const stdExec = async (
-  cmd: string,
-  args: string[],
-  options?: ExecOptions
-): Promise<[Buffer, Buffer]> => {
-  const buffers = [[], []] as [Buffer[], Buffer[]]
-  await dbgExec(cmd, args, {
-    ...(options || {}),
-    listeners: {
-      ...(options?.listeners || {}),
-      debug,
-      stdout: chunk => buffers[0].push(chunk),
-      stderr: chunk => buffers[1].push(chunk)
-    }
-  })
-
-  return buffers.map(chunks => Buffer.concat(chunks)) as [Buffer, Buffer]
-}
-
-const strExec = async (
-  cmd: string,
-  args: string[],
-  options?: ExecOptions
-): Promise<[string, string]> =>
-  (await stdExec(cmd, args, options)).map((buffer: Buffer) =>
-    buffer.toString('utf-8')
-  ) as [string, string]
+import {dbgExec, stdExec, strExec} from '../exec'
 
 const createSrcPackage = async (packageRoot: string): Promise<string> => {
   const [srcTar] = await strExec('npm', ['pack'], {
     cwd: packageRoot
   })
-  return resolve(packageRoot, `./${srcTar}`)
+  return resolve(packageRoot, `./${srcTar.trim()}`)
 }
 
 const createTempPackage = async (): Promise<string> => {
@@ -56,7 +14,7 @@ const createTempPackage = async (): Promise<string> => {
   await dbgExec('npm', ['init', '-y'], {
     cwd: tmpPkgRoot
   })
-  return tmpPkgRoot
+  return tmpPkgRoot.trim()
 }
 
 const execNpmInstall = async (packageRoot: string): Promise<Buffer> => {

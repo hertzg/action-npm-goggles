@@ -22,7 +22,7 @@ async function run(): Promise<void> {
       resolvedPackageJsonPath
     })
   } catch (error) {
-    setFailed(error.message)
+    setFailed(error.stack)
   }
 }
 

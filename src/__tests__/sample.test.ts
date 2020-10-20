@@ -68,13 +68,23 @@ describe('fakePackage', () => {
             "
       # Report for [v1.0.1-0-unreleased.pr1337.1234](../actions/runs/1234)
 
-      <details><summary>
-
-      %3Apackage%3A%20Packing%20output
-      </summary>
+      <details><summary>:package: npm pack</summary>
       <blockquote>
 
-      npm%20notice%20%0Anpm%20notice%20%uD83D%uDCE6%20%20fakepackage@1.0.0%0Anpm%20notice%20%3D%3D%3D%20Tarball%20Contents%20%3D%3D%3D%20%0Anpm%20notice%20207B%20package.json%0Anpm%20notice%20%3D%3D%3D%20Tarball%20Details%20%3D%3D%3D%20%0Anpm%20notice%20name%3A%20%20%20%20%20%20%20%20%20%20fakepackage%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0Anpm%20notice%20version%3A%20%20%20%20%20%20%201.0.0%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0Anpm%20notice%20filename%3A%20%20%20%20%20%20fakepackage-1.0.0.tgz%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0Anpm%20notice%20package%20size%3A%20%20238%20B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0Anpm%20notice%20unpacked%20size%3A%20207%20B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0Anpm%20notice%20shasum%3A%20%20%20%20%20%20%20%204efdfe4f81ce57e8974363cb45996be1f131fc4c%0Anpm%20notice%20integrity%3A%20%20%20%20%20sha512-4+uqe80SaNlh6%5B...%5DpsK71E0AUzs/Q%3D%3D%0Anpm%20notice%20total%20files%3A%20%20%201%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0Anpm%20notice%20%0Afakepackage-1.0.0.tgz%0A
+      \`\`\`
+      fakepackage-1.0.0.tgz
+
+      \`\`\`
+      </blockquote>
+      </details>
+      <details><summary>:zap: npm install</summary>
+      <blockquote>
+
+      \`\`\`
+      + fakepackage@1.0.0
+      added 1 package in 0.093s
+
+      \`\`\`
       </blockquote>
       </details>
       ",

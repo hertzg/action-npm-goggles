@@ -1,20 +1,12 @@
-import {exec} from '@actions/exec'
-import {debug} from '@actions/core'
 import {details} from '../message'
+import {stdExec} from '../exec'
 
 const execNpmDryPack = async (packageRoot: string): Promise<Buffer> => {
-  const chunks: Buffer[] = []
-
-  await exec('npm', ['pack', '--dry-run'], {
-    cwd: packageRoot,
-    listeners: {
-      debug,
-      stdout: chunk => chunks.push(chunk),
-      stderr: chunk => chunks.push(chunk)
-    }
+  const [stdout] = await stdExec('npm', ['pack', '--dry-run'], {
+    cwd: packageRoot
   })
 
-  return Buffer.concat(chunks)
+  return stdout
 }
 
 const TITLE = ':package: npm pack'
