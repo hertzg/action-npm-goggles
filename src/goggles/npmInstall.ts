@@ -1,24 +1,9 @@
 import {details} from '../message'
-import {join} from 'path'
-import {dbgExec, stdExec, strExec} from '../exec'
-
-const createSrcPackage = async (packageRoot: string): Promise<string> => {
-  const [srcTar] = await strExec('npm', ['pack'], {
-    cwd: packageRoot
-  })
-  return join(packageRoot, `./${srcTar.trim()}`)
-}
-
-const createTempPackage = async (): Promise<string> => {
-  const [tmpPkgRoot] = await strExec('mktemp', ['-d'])
-  await dbgExec('npm', ['init', '-y'], {
-    cwd: tmpPkgRoot
-  })
-  return tmpPkgRoot.trim()
-}
+import {stdExec} from '../exec'
+import {createSrcPackage, createTempPackage} from '../npm'
 
 const execNpmInstall = async (packageRoot: string): Promise<Buffer> => {
-  const [srcTarPath, tmpPkgRoot] = await Promise.all([
+  const [{tar: srcTarPath}, tmpPkgRoot] = await Promise.all([
     createSrcPackage(packageRoot),
     createTempPackage()
   ])

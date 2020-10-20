@@ -1,18 +1,16 @@
 import {details} from '../message'
-import {stdExec} from '../exec'
+import {createSrcPackage} from '../npm'
 
-const execNpmDryPack = async (packageRoot: string): Promise<Buffer> => {
-  const [, stderr] = await stdExec('npm', ['pack', '--dry-run'], {
-    cwd: packageRoot
-  })
+const execNpmDryPack = async (packageRoot: string): Promise<string> => {
+  const {strerr} = await createSrcPackage(packageRoot, true)
 
-  return stderr
+  return strerr
 }
 
 const TITLE = ':package: npm pack'
 
 export const npmPack = async (packageRoot: string): Promise<string> => {
-  const buffer = await execNpmDryPack(packageRoot)
+  const packLog = await execNpmDryPack(packageRoot)
 
-  return details(TITLE, `\n\n\`\`\`\n${buffer.toString('utf-8')}\n\`\`\`\n`)
+  return details(TITLE, `\n\n\`\`\`\n${packLog}\n\`\`\`\n`)
 }
