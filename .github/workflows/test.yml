@@ -16,5 +16,5 @@ jobs:
       - uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          package-root: './src/__tests__/fixtures/fakePackage'
+          package-root-path: './src/__tests__/fixtures/fakePackage'
           package-json-path: './package.json'
