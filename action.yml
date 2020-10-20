@@ -3,9 +3,8 @@ description: 'Provide insights into your npm package'
 author: 'George Kotchlamazashvili <gerogedot@gmail.com>'
 inputs:
   token:
-    description: 'Access token (default: ${{ secrets.GITHUB_TOKEN }})'
-    required: false
-    default: ${{ secrets.GITHUB_TOKEN }}
+    description: 'Access token (you can use secrets.GITHUB_TOKEN)'
+    required: true
   commenter:
     description: 'Handle of the token owner (default: github-actions)'
     required: false
