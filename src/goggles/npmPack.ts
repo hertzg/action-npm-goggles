@@ -2,11 +2,11 @@ import {details} from '../message'
 import {stdExec} from '../exec'
 
 const execNpmDryPack = async (packageRoot: string): Promise<Buffer> => {
-  const [stdout] = await stdExec('npm', ['pack', '--dry-run'], {
+  const [, stderr] = await stdExec('npm', ['pack', '--dry-run'], {
     cwd: packageRoot
   })
 
-  return stdout
+  return stderr
 }
 
 const TITLE = ':package: npm pack'
