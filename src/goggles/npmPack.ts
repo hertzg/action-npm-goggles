@@ -17,9 +17,9 @@ const execNpmDryPack = async (packageRoot: string): Promise<Buffer> => {
   return Buffer.concat(chunks)
 }
 
-const TITLE = ':package: Packing output'
+const TITLE = ':package: npm pack'
 
-export const dryPack = async (packageRoot: string): Promise<string> => {
+export const npmPack = async (packageRoot: string): Promise<string> => {
   const buffer = await execNpmDryPack(packageRoot)
 
   return details(TITLE, `\n\n\`\`\`\n${buffer.toString('utf-8')}\n\`\`\`\n`)

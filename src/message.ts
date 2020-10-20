@@ -19,7 +19,7 @@ export const header = (
 export const compose = (
   context: typeof github.context,
   version: string,
-  ...sections: string[]
+  sections: string[]
 ): string => `
 ${header(context, version)}
 

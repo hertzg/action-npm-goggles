@@ -3,7 +3,8 @@ import {findPullRequestId} from './pullRequest'
 import {buildVersion} from './version'
 import {upsertCommentByLogin} from './comment'
 import {compose} from './message'
-import {dryPack} from './goggles/dryPack'
+import {npmPack} from './goggles/npmPack'
+import {npmInstall} from './goggles/npmInstall'
 
 export const runAction = async (
   octokit: ReturnType<typeof getOctokit>,
@@ -27,6 +28,9 @@ export const runAction = async (
     context.repo,
     login,
     issue_number,
-    compose(context, nextVersion.short, await dryPack(resolvedPackageRoot))
+    compose(context, nextVersion.short, [
+      await npmPack(resolvedPackageRoot),
+      await npmInstall(resolvedPackageRoot)
+    ])
   )
 }
