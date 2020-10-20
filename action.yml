@@ -6,9 +6,9 @@ inputs:
     description: 'Access token (you can use secrets.GITHUB_TOKEN)'
     required: true
   commenter:
-    description: 'Handle of the token owner (default: github-actions)'
+    description: 'Handle of the token owner (default: github-actions[bot])'
     required: false
-    default: 'github-actions'
+    default: 'github-actions[bot]'
   package-root-path:
     description: 'Path to package root (default: ./)'
     required: false
