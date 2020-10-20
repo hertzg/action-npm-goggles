@@ -8,7 +8,7 @@ const findFirstPreviousCommentIdByLogin = async (
   login: string
 ): Promise<number | null> => {
   debug(
-    `findFirstPreviousCommentIdByLogin ${JSON.stringify({
+    `findFirstPreviousCommentIdByLogin called with ${JSON.stringify({
       repo,
       issue_number,
       login
@@ -33,13 +33,12 @@ const findFirstPreviousCommentIdByLogin = async (
     })}`
   )
   if (!comment) {
+    debug(`findFirstPreviousCommentIdByLogin returning ${JSON.stringify(null)}`)
     return null
   }
 
   debug(
-    `findFirstPreviousCommentIdByLogin returning ${JSON.stringify({
-      comment
-    })}`
+    `findFirstPreviousCommentIdByLogin returning ${JSON.stringify(comment.id)}`
   )
   return comment.id
 }
