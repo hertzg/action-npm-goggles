@@ -1,6 +1,7 @@
 import * as github from '@actions/github'
 
-export const escape = (str: string): string => str //str.replace(/%/g, '%25').replace(/\n/g, '%0A').replace(/\r/g, '%0D')
+export const escape = (str: string): string =>
+  str.replace(/%/g, '%25').replace(/\n/g, '%0A').replace(/\r/g, '%0D')
 
 export const details = (
   title: string,

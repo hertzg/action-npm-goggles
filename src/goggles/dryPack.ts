@@ -1,6 +1,6 @@
 import {exec} from '@actions/exec'
 import {debug} from '@actions/core'
-import {details} from '../message'
+import {details, escape} from '../message'
 
 const execNpmDryPack = async (packageRoot: string): Promise<Buffer> => {
   const chunks: Buffer[] = []
