@@ -30,7 +30,7 @@ export const runAction = async (
     issue_number,
     compose(context, nextVersion.short, [
       await npmPack(resolvedPackageRoot),
-      await npmInstall(resolvedPackageRoot)
+      ...(await npmInstall(resolvedPackageRoot))
     ])
   )
 }
