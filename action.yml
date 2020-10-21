@@ -2,10 +2,21 @@ name: 'npm-goggles'
 description: 'Provide insights into your npm package'
 author: 'George Kotchlamazashvili <gerogedot@gmail.com>'
 inputs:
-  milliseconds: # change this
+  token:
+    description: 'Access token (you can use secrets.GITHUB_TOKEN)'
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  commenter:
+    description: 'Handle of the token owner (default: github-actions[bot])'
+    required: false
+    default: 'github-actions[bot]'
+  package-root-path:
+    description: 'Path to package root (default: ./)'
+    required: false
+    default: './'
+  package-json-path:
+    description: 'Path to package.json file relative to `package-root-path` (default: ./package.json)'
+    required: false
+    default: './package.json'
 runs:
   using: 'node12'
   main: 'dist/index.js'
