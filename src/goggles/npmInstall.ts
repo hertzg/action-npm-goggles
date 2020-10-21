@@ -5,6 +5,7 @@ import {createSrcPackage, createTempPackage} from '../npm'
 const execNpmInstall = async (
   packageRoot: string
 ): Promise<{
+  tmpPkgRoot: string
   installLog: string
   dependencyLog: string
   nodeModulesDiskUsageLog: string
@@ -19,7 +20,7 @@ const execNpmInstall = async (
     [dependencyLog],
     [nodeModulesDiskUsageLog]
   ] = await Promise.all([
-    strExec('npm', ['install', srcTarPath], {
+    strExec('npm', ['install', '--save', srcTarPath], {
       cwd: tmpPkgRoot
     }),
     strExec('npm', ['ls', '--depth=1'], {
@@ -33,6 +34,7 @@ const execNpmInstall = async (
   ])
 
   return {
+    tmpPkgRoot,
     installLog,
     dependencyLog,
     nodeModulesDiskUsageLog
@@ -41,16 +43,20 @@ const execNpmInstall = async (
 
 export const npmInstall = async (packageRoot: string): Promise<string[]> => {
   const {
+    tmpPkgRoot,
     installLog,
     dependencyLog,
     nodeModulesDiskUsageLog
   } = await execNpmInstall(packageRoot)
 
   return [
-    details(':zap: npm install', code(installLog)),
-    details(':information_source: npm ls --depth=1', code(dependencyLog)),
+    details(`:zap: npm install [in ${tmpPkgRoot}]`, code(installLog)),
     details(
-      ':information_source: du -hsc node_modules/',
+      `:information_source: npm ls --depth=1 [in ${tmpPkgRoot}]`,
+      code(dependencyLog)
+    ),
+    details(
+      `:bar_chart: du -hsc node_modules/ [in ${tmpPkgRoot}]`,
       code(nodeModulesDiskUsageLog)
     )
   ]
