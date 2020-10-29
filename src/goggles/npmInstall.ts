@@ -16,7 +16,7 @@ const execNpmInstall = async (
   ])
 
   const [
-    [installLog],
+    [, , installLog],
     [dependencyLog],
     [nodeModulesDiskUsageLog]
   ] = await Promise.all([
