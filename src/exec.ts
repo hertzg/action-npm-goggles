@@ -34,26 +34,36 @@ export const stdExec = async (
   cmd: string,
   args: string[],
   options?: ExecOptions
-): Promise<[Buffer, Buffer]> => {
-  const buffers = [[], []] as [Buffer[], Buffer[]]
+): Promise<[Buffer, Buffer, Buffer]> => {
+  const buffers = [[], [], []] as [Buffer[], Buffer[], Buffer[]]
   await dbgExec(cmd, args, {
     ...(options || {}),
     listeners: {
       ...(options?.listeners || {}),
       debug,
-      stdout: chunk => buffers[0].push(chunk),
-      stderr: chunk => buffers[1].push(chunk)
+      stdout: chunk => {
+        buffers[0].push(chunk)
+        buffers[2].push(chunk)
+      },
+      stderr: chunk => {
+        buffers[1].push(chunk)
+        buffers[2].push(chunk)
+      }
     }
   })
 
-  return buffers.map(chunks => Buffer.concat(chunks)) as [Buffer, Buffer]
+  return buffers.map(chunks => Buffer.concat(chunks)) as [
+    Buffer,
+    Buffer,
+    Buffer
+  ]
 }
 
 export const strExec = async (
   cmd: string,
   args: string[],
   options?: ExecOptions
-): Promise<[string, string]> =>
+): Promise<[string, string, string]> =>
   (await stdExec(cmd, args, options)).map((buffer: Buffer) =>
     buffer.toString('utf-8').replace(/\n$/, '').trim()
-  ) as [string, string]
+  ) as [string, string, string]
